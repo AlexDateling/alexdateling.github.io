@@ -1,117 +1,166 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { useEffect, useState } from 'react'
+import { albums, type Album } from './data'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [active, setActive] = useState<Album | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  // Lock scroll + close the album viewer on Escape.
+  useEffect(() => {
+    if (!active) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActive(null)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [active])
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <h1>Alex</h1>
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Welcome to my personal website!
-          </p>
-        </div>
+      <header className="site-header">
+        <a className="brand" href="#top">
+          Alex Dateling
+        </a>
         <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          className="menu-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((o) => !o)}
         >
-          Count is {count}
+          <span />
+          <span />
+          <span />
         </button>
-      </section>
+        <nav className={menuOpen ? 'open' : ''} onClick={() => setMenuOpen(false)}>
+          <a href="#albums">Albums</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-      <div className="ticks"></div>
+      <main id="top">
+        <section className="hero band-soft">
+          <div className="band-inner">
+            <p className="eyebrow">Photographer &middot; Visual Storyteller</p>
+            <h1>
+              Light, framed with
+              <br />
+              intention.
+            </h1>
+            <p className="hero-sub">
+              I capture quiet moments and bold landscapes across the world.
+              Portraits, streets, and the spaces in between.
+            </p>
+            <a className="btn" href="#albums">
+              View the albums
+            </a>
+          </div>
+        </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <section id="albums" className="albums band-light">
+          <div className="band-inner">
+            <div className="section-head">
+              <h2>Albums</h2>
+            </div>
+
+            <div className="album-grid">
+              {albums.map((a) => (
+                <div key={a.id} className="album-card">
+                  <button
+                    className="album-thumb"
+                    onClick={() => setActive(a)}
+                    aria-label={`Open ${a.title}`}
+                  >
+                    <span className="album-thumb-frame" aria-hidden="true">
+                      <iframe
+                        src={a.embed}
+                        title={`${a.title} preview`}
+                        tabIndex={-1}
+                        scrolling="no"
+                      ></iframe>
+                    </span>
+                    <span className="album-thumb-overlay">View album</span>
+                  </button>
+                  <span className="album-info">
+                    <strong>{a.title}</strong>
+                    <em>{a.description}</em>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="about band-dark">
+          <div className="band-inner about-grid">
+            <div className="about-text">
+              <h2>About</h2>
+              <p>
+                I&rsquo;m Alex Dateling (aka 7BD), a photographer based in
+                Johannesburg and visual creator focused on capturing people,
+                movement, and authentic moments.
+              </p>
+              <p>
+                From sports and events to portraits and everyday stories, I create
+                images that preserve the feeling of being there.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="contact" className="site-footer">
+        <h2>Let&rsquo;s create something.</h2>
+        <a className="mail" href="mailto:hello@alexdateling.com">
+         ADateling@Gmail.com
+        </a>
+        <div className="social">
+          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
+          <a href="https://github.com/alexdateling" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          <a href="https://x.com" target="_blank" rel="noreferrer">
+            X
+          </a>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <p className="copyright">
+          &copy; {new Date().getFullYear()} Alex Dateling. All rights reserved.
+        </p>
+      </footer>
 
-      {/* <div className="ticks"></div> */}
-      <section id="spacer"></section>
+      {active && (
+        <div className="viewer" onClick={() => setActive(null)}>
+          <div className="viewer-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="viewer-bar">
+              <strong>{active.title}</strong>
+              <span className="viewer-actions">
+                <a href={active.url} target="_blank" rel="noreferrer">
+                  Open in new tab
+                </a>
+                <button
+                  className="viewer-close"
+                  aria-label="Close"
+                  onClick={() => setActive(null)}
+                >
+                  &times;
+                </button>
+              </span>
+            </div>
+            <iframe
+              src={active.embed}
+              title={active.title}
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
     </>
   )
 }
