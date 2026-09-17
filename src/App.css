@@ -142,6 +142,54 @@ main {
 }
 
 /* ---------- Albums ---------- */
+/* Logo fills the left half of the section as a background layer.
+   Content is pushed onto the right half and layered on top. */
+.albums.band-light {
+  position: relative;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* Dedicated background layer so the logo shows regardless of content height. */
+.albums.band-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 30%;
+  background-image: url('/logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% auto;
+  z-index: 0;
+}
+
+.albums .band-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  min-height: 60vh;
+}
+
+.albums .band-inner > * {
+  grid-column: 2;
+}
+
+@media (max-width: 720px) {
+  .albums.band-light::before {
+    position: relative;
+    width: 100%;
+    height: 220px;
+  }
+
+  .albums .band-inner {
+    display: block;
+    min-height: 0;
+  }
+}
+
 .section-head {
   display: flex;
   align-items: center;

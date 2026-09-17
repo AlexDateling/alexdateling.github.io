@@ -20,4 +20,28 @@ export const albums: Album[] = [
       'https://embed.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
     url: 'https://albums.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
   },
+  // {
+  //   id: 2,
+  //   title: 'Tang Soo Do Album',
+  //   description: 'Tang Soo Do: Shoot & BTS.',
+  //   embed:
+  //     'https://embed.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
+  //   url: 'https://albums.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Tang Soo Do Album',
+  //   description: 'Tang Soo Do: Shoot & BTS.',
+  //   embed:
+  //     'https://embed.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
+  //   url: 'https://albums.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
+  // },
+  // {
+  //   id: 4,
+  //   title: 'Tang Soo Do Album',
+  //   description: 'Tang Soo Do: Shoot & BTS.',
+  //   embed:
+  //     'https://embed.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
+  //   url: 'https://albums.ente.com/?t=X9DKZ9YBBW#BHn9v4WnPiUpPCvLhnzwus5ih5gG334A1AaYWtoCeFZ6',
+  // },
 ]
