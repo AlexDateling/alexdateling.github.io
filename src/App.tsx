@@ -120,15 +120,15 @@ function App() {
          ADateling@Gmail.com
         </a>
         <div className="social">
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+          <a href="https://instagram.com/alexdateling" target="_blank" rel="noreferrer">
             Instagram
           </a>
           <a href="https://github.com/alexdateling" target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a href="https://x.com" target="_blank" rel="noreferrer">
+          {/* <a href="https://x.com" target="_blank" rel="noreferrer">
             X
-          </a>
+          </a> */}
         </div>
         <p className="copyright">
           &copy; {new Date().getFullYear()} Alex Dateling. All rights reserved.
